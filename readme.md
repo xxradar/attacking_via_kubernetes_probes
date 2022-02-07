@@ -148,4 +148,5 @@ spec:
       periodSeconds: 3
  ```
 
-
+### Conclusion
+Many things are written on securely deploying applications on kubernetes. Keep in mind that all aspects need full attention. Generating and building Kubernetes manifest is also developping code.
