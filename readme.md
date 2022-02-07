@@ -1,4 +1,4 @@
-## Exploiting applications using livenessProbes in K8s
+## Exploiting applications using livenessProbes in Kubernetes
 ### Introduction
 Startup, readiness, and liveness probes are very well described in the Kubernetes documentation. <br>
 Kubelet uses these probes defined in the pod manifest to verify whether a pod is booting, ready to accept traffic and still alive.<br>
