@@ -13,7 +13,7 @@ The problems described here are considered 'as designed', as you should download
 The examples below shows that trusted sources of container images will not solve the problem, neither will image scanning. <br><br>
 To prevent an attack from happening, it is mandatory to scan the Kubernetes pod and deployment manifests rigorously before deploying. <br>
 
-### Examples1: Overwriting files on the pod filesystem 
+### Examples1: Overwriting files on the pod filesystem - spoofing websites
 ```
 kubectl apply -f - <<EOF
 apiVersion: v1
