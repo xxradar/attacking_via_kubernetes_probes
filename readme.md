@@ -10,7 +10,7 @@ There are different ways the probes are executed. <br>
 - exec <br>
 
 The problems described here are considered 'as designed', as you should download containers from a trusted source according to the reviewers. <br>
-The examples below shows that trusted sources of container images will not solve the problem, neither will image scanning <br>
+The examples below shows that trusted sources of container images will not solve the problem, neither will image scanning. <br><br>
 To prevent an attack from happening, it is mandatory to scan the Kubernetes pod and deployment manifests rigorously before deploying. <br>
 
 ### Examples1: Overwriting files on the pod filesystem 
