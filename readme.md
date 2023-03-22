@@ -153,7 +153,7 @@ spec:
     - touch /tmp/healthy;sleep 600
     livenessProbe:
       httpGet:
-        host: www.xxxx.com
+        host:bd.kubiosec.tech
         path: /?'OR 1=1--
         port: 8080
         httpHeaders:
