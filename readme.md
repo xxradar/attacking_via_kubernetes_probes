@@ -158,7 +158,7 @@ spec:
         port: 8080
         httpHeaders:
           - name: User-Agent
-            value: xxxxxxxxx
+            value: hacking-demo
 EOF
 ```
 ```
