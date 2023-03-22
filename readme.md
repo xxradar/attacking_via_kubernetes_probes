@@ -192,7 +192,7 @@ spec:
     livenessProbe:
       httpGet:
         host: bd.kubiosec.tech
-        path: /index.html?test=' or 1=1--
+        path: /
         port: 8080
         httpHeaders:
         - name: Custom-Header
