@@ -154,7 +154,7 @@ spec:
     livenessProbe:
       httpGet:
         host: bd.kubiosec.tech
-        path: /?'OR 1=1--
+        path: /?%27OR%201=1--
         port: 8080
         httpHeaders:
           - name: User-Agent
