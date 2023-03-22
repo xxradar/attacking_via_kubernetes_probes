@@ -191,7 +191,7 @@ spec:
     - containerPort: 80
     livenessProbe:
       httpGet:
-        host: www.radarhack.com
+        host: bd.kubiosec.tech
         path: /index.html?test=' or 1=1--
         port: 8080
         httpHeaders:
