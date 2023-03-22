@@ -106,7 +106,7 @@ spec:
       periodSeconds: 5
 EOF
 ```
-SVC extraction
+SVC extraction (You can also use UDP to extract information)
 ```
 kubectl apply -f - <<EOF
 apiVersion: v1
