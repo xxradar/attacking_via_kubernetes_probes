@@ -231,5 +231,28 @@ spec:
 EOF
 ```
 
+### Examples5 : Using https probes 
+```
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+  - name: my-container
+    image: nginx
+    ports:
+    - containerPort: 80
+    livenessProbe:
+      httpGet:
+        host: www.radarhack.com
+        path: /
+        port: 443
+        scheme: HTTPS
+      initialDelaySeconds: 5
+      periodSeconds: 10
+EOF
+```
 ### Conclusion
 Many things are written on securely deploying applications on kubernetes. Keep in mind that all aspects need full attention. Generating and building Kubernetes manifest is also developping code.
